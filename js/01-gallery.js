@@ -3,9 +3,9 @@ import { galleryItems } from "./gallery-items.js";
 
 const gallery = document.querySelector(".gallery");
 const galleryItem = galleryItems
-	.map(
-		(item) =>
-			`<div class="gallery__item">
+  .map(
+    (item) =>
+      `<div class="gallery__item">
     <a class="gallery__link" href="${item.original}">
       <img
         class="gallery__image"
@@ -14,23 +14,22 @@ const galleryItem = galleryItems
         alt="${item.description}"
       />
     </a>
-  </div>`,
-	)
-	.join("");
+  </div>`
+  )
+  .join("");
 gallery.innerHTML = galleryItem;
 gallery.addEventListener("click", (event) => {
-	event.preventDefault();
-	if (event.target.nodeName !== "IMG") return;
-    document.querySelector('.gallery__image').onclick = () => {
-
-        basicLightbox.create(`
-            <img width="1400" height="900" src="${event.target.dataset.source}">
-        `).show()
-    }
-    // }
-	// basicLightbox.create(`
-	//     <img width="1400" height="900" src="${event.target.dataset.source}">
-	// `).show()
+  event.preventDefault();
+  if (event.target.nodeName !== "IMG") return;
+  document.querySelector(".gallery__image").onclick = () => {
+    basicLightbox
+      .create(
+        `
+        <img width="1400" height="900" src="${event.target.dataset.source}">
+        `
+      )
+      .show();
+  };
 });
 
 // import * as basicLightbox from 'basiclightbox'
