@@ -3,9 +3,9 @@ import { galleryItems } from "./gallery-items.js";
 
 const gallery = document.querySelector(".gallery");
 const galleryItem = galleryItems
-  .map(
-    (item) =>
-      `<div class="gallery__item">
+	.map(
+		(item) =>
+			`<div class="gallery__item">
     <a class="gallery__link" href="${item.original}">
       <img
         class="gallery__image"
@@ -14,33 +14,24 @@ const galleryItem = galleryItems
         alt="${item.description}"
       />
     </a>
-  </div>`
-  )
-  .join("");
+  </div>`,
+	)
+	.join("");
 gallery.innerHTML = galleryItem;
 gallery.addEventListener("click", (event) => {
-  event.preventDefault();
-  if (event.target.nodeName !== "IMG") return;
-  document.querySelector(".gallery__image").onclick = () => {
-    basicLightbox
-      .create(
-        `
+	event.preventDefault();
+	if (event.target.nodeName !== "IMG") return;
+
+	const instance = basicLightbox.create(
+		`
         <img width="1400" height="900" src="${event.target.dataset.source}">
-        `
-      )
-      .show();
-  };
+        `,
+	);
+	instance.show();
+
+	gallery.addEventListener("keydown", (event) => {
+		if (event.key === "Escape") {
+			instance.close();
+		}
+	});
 });
-
-// import * as basicLightbox from 'basiclightbox'
-
-// const instance = basicLightbox.create(`
-//     <div class="modal">
-//         <p>
-//             Your first lightbox with just a few lines of code.
-//             Yes, it's really that simple.
-//         </p>
-//     </div>
-// `)
-
-// instance.show()
