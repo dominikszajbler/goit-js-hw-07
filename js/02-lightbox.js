@@ -20,4 +20,5 @@ const galleryItem = galleryItems
 gallery.innerHTML = galleryItem;
 new SimpleLightbox(".gallery a", {
 	captionDelay: 250,
+  captionsData: "alt",
 });
